@@ -175,7 +175,7 @@ const Employees = () => {
             key={employee.id}
             className="animate-slide-up hover:shadow-elegant transition-all duration-300 cursor-pointer"
             style={{ animationDelay: `${index * 50}ms` }}
-            onClick={() => navigate(`/employees/${employee.id}`)}
+            onClick={() => navigate(`/dashboard/employees/${employee.id}/documents`)}
           >
             <CardHeader>
               <div className="flex items-start justify-between">

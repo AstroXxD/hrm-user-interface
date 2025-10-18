@@ -12,12 +12,15 @@ import {
   Moon,
   Sun,
   Building2,
+  User,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useAuth } from "@/contexts/AuthContext";
 
 const DashboardLayout = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { user, logout } = useAuth();
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [darkMode, setDarkMode] = useState(false);
 
@@ -26,13 +29,31 @@ const DashboardLayout = () => {
     document.documentElement.classList.toggle("dark");
   };
 
-  const navigation = [
-    { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
-    { name: "Employees", href: "/employees", icon: Users },
-    { name: "Leave Management", href: "/leave", icon: Calendar },
-    { name: "Reports", href: "/reports", icon: FileText },
-    { name: "Settings", href: "/settings", icon: Settings },
-  ];
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
+
+  // Role-based navigation
+  const getNavigation = () => {
+    if (user?.role === 'admin' || user?.role === 'manager') {
+      return [
+        { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
+        { name: "Employees", href: "/dashboard/employees", icon: Users },
+        { name: "Leave Management", href: "/dashboard/leave", icon: Calendar },
+        { name: "Reports", href: "/dashboard/reports", icon: FileText },
+        { name: "Settings", href: "/dashboard/settings", icon: Settings },
+      ];
+    } else {
+      return [
+        { name: "Dashboard", href: "/employee", icon: LayoutDashboard },
+        { name: "Profile", href: "/employee/profile", icon: User },
+        { name: "Settings", href: "/employee/settings", icon: Settings },
+      ];
+    }
+  };
+
+  const navigation = getNavigation();
 
   return (
     <div className="min-h-screen bg-background">
@@ -89,7 +110,7 @@ const DashboardLayout = () => {
             <Button
               variant="ghost"
               className="w-full justify-start"
-              onClick={() => navigate('/login')}
+              onClick={handleLogout}
             >
               <LogOut className="w-5 h-5 mr-3" />
               {sidebarOpen && <span>Logout</span>}
@@ -132,9 +153,9 @@ const DashboardLayout = () => {
 
               <div 
                 className="w-10 h-10 rounded-full gradient-accent flex items-center justify-center text-accent-foreground font-semibold cursor-pointer hover:scale-105 transition-transform"
-                onClick={() => navigate('/settings')}
+                onClick={() => navigate((user?.role === 'admin' || user?.role === 'manager') ? '/dashboard/settings' : '/employee/settings')}
               >
-                JD
+                {user?.firstName?.[0]}{user?.lastName?.[0]}
               </div>
             </div>
           </div>

@@ -5,12 +5,14 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Card } from "@/components/ui/card";
-import { Eye, EyeOff, Building2, Moon, Sun } from "lucide-react";
+import { Eye, EyeOff, Building2, Moon, Sun, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/contexts/AuthContext";
 
 const Login = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { login, isLoading, isAuthenticated } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
   const [formData, setFormData] = useState({
@@ -19,12 +21,18 @@ const Login = () => {
     remember: false,
   });
 
+  // Redirect if already authenticated
+  if (isAuthenticated) {
+    navigate("/");
+    return null;
+  }
+
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
     document.documentElement.classList.toggle("dark");
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!formData.email || !formData.password) {
@@ -36,12 +44,21 @@ const Login = () => {
       return;
     }
 
-    // Mock login - in production, call authentication API
-    toast({
-      title: "Login Successful",
-      description: "Welcome back!",
-    });
-    navigate("/dashboard");
+    const result = await login(formData.email, formData.password);
+    
+    if (result.success) {
+      toast({
+        title: "Login Successful",
+        description: "Welcome back!",
+      });
+      navigate("/");
+    } else {
+      toast({
+        variant: "destructive",
+        title: "Login Failed",
+        description: result.message,
+      });
+    }
   };
 
   return (
@@ -122,8 +139,19 @@ const Login = () => {
             </Link>
           </div>
 
-          <Button type="submit" className="w-full h-11 gradient-primary hover:opacity-90 transition-opacity">
-            Sign In
+          <Button 
+            type="submit" 
+            className="w-full h-11 gradient-primary hover:opacity-90 transition-opacity"
+            disabled={isLoading}
+          >
+            {isLoading ? (
+              <>
+                <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                Signing In...
+              </>
+            ) : (
+              "Sign In"
+            )}
           </Button>
         </form>
 
@@ -134,6 +162,16 @@ const Login = () => {
               Sign up
             </Link>
           </p>
+        </div>
+
+        {/* Demo Credentials */}
+        <div className="mt-6 p-4 bg-muted/50 rounded-lg">
+          <h3 className="text-sm font-semibold mb-2">Demo Credentials:</h3>
+          <div className="space-y-1 text-xs text-muted-foreground">
+            <div><strong>Admin:</strong> admin@hrm.com / admin123</div>
+            <div><strong>Employee:</strong> employee@hrm.com / employee123</div>
+            <div><strong>Manager:</strong> manager@hrm.com / manager123</div>
+          </div>
         </div>
       </Card>
     </div>

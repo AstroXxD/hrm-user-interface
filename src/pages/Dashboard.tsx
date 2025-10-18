@@ -1,5 +1,6 @@
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Users, UserCheck, UserX, Calendar } from "lucide-react";
+import { Users, UserCheck, UserX, Calendar, Clock } from "lucide-react";
 import {
   BarChart,
   Bar,
@@ -17,6 +18,16 @@ import {
 } from "recharts";
 
 const Dashboard = () => {
+  const [currentTime, setCurrentTime] = useState(new Date());
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
   // Sample data
   const roleDistribution = [
     { role: "Developer", count: 45 },
@@ -84,11 +95,34 @@ const Dashboard = () => {
 
   return (
     <div className="space-y-6 animate-fade-in">
-      <div>
-        <h1 className="text-3xl font-bold">Dashboard</h1>
-        <p className="text-muted-foreground mt-1">
-          Welcome back! Here's your HRM overview
-        </p>
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-bold">Dashboard</h1>
+          <p className="text-muted-foreground mt-1">
+            Welcome back! Here's your HRM overview
+          </p>
+        </div>
+        <div className="text-right">
+          <div className="flex items-center gap-2 text-sm text-muted-foreground mb-1">
+            <Clock className="w-4 h-4" />
+            <span>
+              {currentTime.toLocaleDateString('en-US', { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+              })}
+            </span>
+          </div>
+          <div className="text-2xl font-bold text-foreground">
+            {currentTime.toLocaleTimeString('en-US', { 
+              hour: '2-digit', 
+              minute: '2-digit',
+              second: '2-digit',
+              hour12: true
+            })}
+          </div>
+        </div>
       </div>
 
       {/* Stats Grid */}
