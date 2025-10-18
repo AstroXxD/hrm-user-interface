@@ -8,6 +8,7 @@ import Signup from "./pages/Signup";
 import DashboardLayout from "./components/DashboardLayout";
 import Dashboard from "./pages/Dashboard";
 import Employees from "./pages/Employees";
+import EmployeeProfile from "./pages/EmployeeProfile";
 import LeaveManagement from "./pages/LeaveManagement";
 import Reports from "./pages/Reports";
 import NotFound from "./pages/NotFound";
@@ -28,6 +29,7 @@ const App = () => (
           <Route element={<DashboardLayout />}>
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/employees" element={<Employees />} />
+            <Route path="/employees/:id" element={<EmployeeProfile />} />
             <Route path="/leave" element={<LeaveManagement />} />
             <Route path="/reports" element={<Reports />} />
           </Route>

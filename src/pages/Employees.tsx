@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -25,6 +26,7 @@ type Employee = {
 };
 
 const Employees = () => {
+  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("all");
 
@@ -173,6 +175,7 @@ const Employees = () => {
             key={employee.id}
             className="animate-slide-up hover:shadow-elegant transition-all duration-300 cursor-pointer"
             style={{ animationDelay: `${index * 50}ms` }}
+            onClick={() => navigate(`/employees/${employee.id}`)}
           >
             <CardHeader>
               <div className="flex items-start justify-between">
