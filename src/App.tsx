@@ -11,6 +11,7 @@ import Employees from "./pages/Employees";
 import EmployeeProfile from "./pages/EmployeeProfile";
 import LeaveManagement from "./pages/LeaveManagement";
 import Reports from "./pages/Reports";
+import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -32,6 +33,7 @@ const App = () => (
             <Route path="/employees/:id" element={<EmployeeProfile />} />
             <Route path="/leave" element={<LeaveManagement />} />
             <Route path="/reports" element={<Reports />} />
+            <Route path="/settings" element={<Settings />} />
           </Route>
 
           <Route path="*" element={<NotFound />} />

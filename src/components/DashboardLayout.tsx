@@ -89,7 +89,7 @@ const DashboardLayout = () => {
             <Button
               variant="ghost"
               className="w-full justify-start"
-              onClick={() => {}}
+              onClick={() => navigate('/login')}
             >
               <LogOut className="w-5 h-5 mr-3" />
               {sidebarOpen && <span>Logout</span>}
@@ -132,7 +132,7 @@ const DashboardLayout = () => {
 
               <div 
                 className="w-10 h-10 rounded-full gradient-accent flex items-center justify-center text-accent-foreground font-semibold cursor-pointer hover:scale-105 transition-transform"
-                onClick={() => navigate('/employees/E001')}
+                onClick={() => navigate('/settings')}
               >
                 JD
               </div>

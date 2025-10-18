@@ -5,18 +5,24 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Card } from "@/components/ui/card";
-import { Eye, EyeOff, Building2 } from "lucide-react";
+import { Eye, EyeOff, Building2, Moon, Sun } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const Login = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const [showPassword, setShowPassword] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
     remember: false,
   });
+
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+    document.documentElement.classList.toggle("dark");
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -39,7 +45,20 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-secondary to-muted p-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-secondary to-muted p-4 relative">
+      {/* Dark mode toggle button */}
+      <Button
+        variant="ghost"
+        size="icon"
+        onClick={toggleDarkMode}
+        className="absolute top-6 right-6 rounded-full"
+      >
+        {darkMode ? (
+          <Sun className="w-5 h-5" />
+        ) : (
+          <Moon className="w-5 h-5" />
+        )}
+      </Button>
       <Card className="w-full max-w-md p-8 glass-effect animate-scale-in">
         <div className="flex flex-col items-center mb-8">
           <div className="w-16 h-16 rounded-2xl gradient-primary flex items-center justify-center mb-4 shadow-elegant">
