@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Card } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Eye, EyeOff, Building2, Moon, Sun, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/contexts/AuthContext";
@@ -21,6 +22,15 @@ const Login = () => {
     remember: false,
   });
 
+  const [signupData, setSignupData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    agreeToTerms: false,
+  });
+
   // Redirect if already authenticated
   if (isAuthenticated) {
     navigate("/");
@@ -32,7 +42,7 @@ const Login = () => {
     document.documentElement.classList.toggle("dark");
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleLoginSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!formData.email || !formData.password) {
@@ -61,6 +71,53 @@ const Login = () => {
     }
   };
 
+  const handleSignupSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!signupData.firstName || !signupData.lastName || !signupData.email || !signupData.password || !signupData.confirmPassword) {
+      toast({
+        variant: "destructive",
+        title: "Validation Error",
+        description: "Please fill in all fields",
+      });
+      return;
+    }
+
+    if (signupData.password !== signupData.confirmPassword) {
+      toast({
+        variant: "destructive",
+        title: "Validation Error",
+        description: "Passwords do not match",
+      });
+      return;
+    }
+
+    if (!signupData.agreeToTerms) {
+      toast({
+        variant: "destructive",
+        title: "Validation Error",
+        description: "Please agree to the terms and conditions",
+      });
+      return;
+    }
+
+    // Mock signup - in production, call registration API
+    toast({
+      title: "Signup Successful",
+      description: "Account created successfully! Please login.",
+    });
+    
+    // Reset signup form
+    setSignupData({
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+      agreeToTerms: false,
+    });
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-secondary to-muted p-4 relative">
       {/* Dark mode toggle button */}
@@ -82,12 +139,19 @@ const Login = () => {
             <Building2 className="w-8 h-8 text-primary-foreground" />
           </div>
           <h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-            Welcome Back
+            HRM System
           </h1>
-          <p className="text-muted-foreground mt-2">Sign in to your account</p>
+          <p className="text-muted-foreground mt-2">Welcome to your HR portal</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <Tabs defaultValue="login" className="w-full">
+          <TabsList className="grid w-full grid-cols-2">
+            <TabsTrigger value="login">Login</TabsTrigger>
+            <TabsTrigger value="signup">Sign Up</TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="login" className="space-y-6 mt-6">
+            <form onSubmit={handleLoginSubmit} className="space-y-6">
           <div className="space-y-2">
             <Label htmlFor="email">Email Address</Label>
             <Input
@@ -153,16 +217,104 @@ const Login = () => {
               "Sign In"
             )}
           </Button>
-        </form>
+            </form>
+          </TabsContent>
 
-        <div className="mt-6 text-center">
-          <p className="text-sm text-muted-foreground">
-            Don't have an account?{" "}
-            <Link to="/signup" className="text-primary hover:text-accent font-medium transition-colors">
-              Sign up
-            </Link>
-          </p>
-        </div>
+          <TabsContent value="signup" className="space-y-6 mt-6">
+            <form onSubmit={handleSignupSubmit} className="space-y-6">
+              <div className="grid gap-4 md:grid-cols-2">
+                <div className="space-y-2">
+                  <Label htmlFor="firstName">First Name</Label>
+                  <Input
+                    id="firstName"
+                    placeholder="John"
+                    value={signupData.firstName}
+                    onChange={(e) => setSignupData({ ...signupData, firstName: e.target.value })}
+                    className="h-11"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="lastName">Last Name</Label>
+                  <Input
+                    id="lastName"
+                    placeholder="Doe"
+                    value={signupData.lastName}
+                    onChange={(e) => setSignupData({ ...signupData, lastName: e.target.value })}
+                    className="h-11"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="signup-email">Email Address</Label>
+                <Input
+                  id="signup-email"
+                  type="email"
+                  placeholder="you@company.com"
+                  value={signupData.email}
+                  onChange={(e) => setSignupData({ ...signupData, email: e.target.value })}
+                  className="h-11"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="signup-password">Password</Label>
+                <div className="relative">
+                  <Input
+                    id="signup-password"
+                    type={showPassword ? "text" : "password"}
+                    placeholder="Create a password"
+                    value={signupData.password}
+                    onChange={(e) => setSignupData({ ...signupData, password: e.target.value })}
+                    className="h-11 pr-10"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                  </button>
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="confirm-password">Confirm Password</Label>
+                <Input
+                  id="confirm-password"
+                  type="password"
+                  placeholder="Confirm your password"
+                  value={signupData.confirmPassword}
+                  onChange={(e) => setSignupData({ ...signupData, confirmPassword: e.target.value })}
+                  className="h-11"
+                />
+              </div>
+
+              <div className="flex items-center space-x-2">
+                <Checkbox
+                  id="agree-terms"
+                  checked={signupData.agreeToTerms}
+                  onCheckedChange={(checked) => 
+                    setSignupData({ ...signupData, agreeToTerms: checked as boolean })
+                  }
+                />
+                <Label htmlFor="agree-terms" className="text-sm font-normal cursor-pointer">
+                  I agree to the{" "}
+                  <Link to="/terms" className="text-primary hover:text-accent transition-colors">
+                    Terms and Conditions
+                  </Link>
+                </Label>
+              </div>
+
+              <Button 
+                type="submit" 
+                className="w-full h-11 gradient-primary hover:opacity-90 transition-opacity"
+              >
+                Create Account
+              </Button>
+            </form>
+          </TabsContent>
+        </Tabs>
 
         {/* Demo Credentials */}
         <div className="mt-6 p-4 bg-muted/50 rounded-lg">
