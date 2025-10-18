@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, Outlet, useLocation } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import {
   LayoutDashboard,
@@ -17,6 +17,7 @@ import { cn } from "@/lib/utils";
 
 const DashboardLayout = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [darkMode, setDarkMode] = useState(false);
 
@@ -129,7 +130,10 @@ const DashboardLayout = () => {
                 )}
               </Button>
 
-              <div className="w-10 h-10 rounded-full gradient-accent flex items-center justify-center text-accent-foreground font-semibold">
+              <div 
+                className="w-10 h-10 rounded-full gradient-accent flex items-center justify-center text-accent-foreground font-semibold cursor-pointer hover:scale-105 transition-transform"
+                onClick={() => navigate('/employees/E001')}
+              >
                 JD
               </div>
             </div>
