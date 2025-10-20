@@ -140,7 +140,7 @@ const Employees = () => {
       </div>
 
       {/* Search and Filter */}
-      <Card className="card-gradient border-2">
+      <Card>
         <CardContent className="pt-6">
           <div className="flex flex-col md:flex-row gap-4">
             <div className="relative flex-1">
@@ -173,7 +173,7 @@ const Employees = () => {
         {filteredEmployees.map((employee, index) => (
           <Card
             key={employee.id}
-            className="animate-slide-up hover:shadow-elegant transition-all duration-300 cursor-pointer card-gradient border-2"
+            className="animate-slide-up hover:shadow-elegant transition-all duration-300 cursor-pointer"
             style={{ animationDelay: `${index * 50}ms` }}
             onClick={() => navigate(`/dashboard/employees/${employee.id}/documents`)}
           >
@@ -230,7 +230,7 @@ const Employees = () => {
       </div>
 
       {filteredEmployees.length === 0 && (
-        <Card className="card-gradient border-2">
+        <Card>
           <CardContent className="py-12 text-center">
             <p className="text-muted-foreground">No employees found</p>
           </CardContent>

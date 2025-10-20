@@ -398,7 +398,7 @@ const EmployeeProfile = () => {
         <p className="text-muted-foreground mt-1">View and manage employee information</p>
       </div>
 
-      <Card className="card-gradient border-2">
+      <Card>
         <CardHeader>
           <div className="flex items-start gap-6">
             <Avatar className="w-20 h-20">
@@ -445,7 +445,7 @@ const EmployeeProfile = () => {
         </CardContent>
       </Card>
 
-      <Card className="card-gradient border-2">
+      <Card>
         <CardHeader>
           <CardTitle>Document Management</CardTitle>
         </CardHeader>

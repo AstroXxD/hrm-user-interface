@@ -141,7 +141,7 @@ const LeaveManagement = () => {
 
       {/* Stats */}
       <div className="grid gap-4 md:grid-cols-3">
-        <Card className="card-gradient border-2">
+        <Card>
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
@@ -156,7 +156,7 @@ const LeaveManagement = () => {
             </div>
           </CardContent>
         </Card>
-        <Card className="card-gradient border-2">
+        <Card>
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
@@ -171,7 +171,7 @@ const LeaveManagement = () => {
             </div>
           </CardContent>
         </Card>
-        <Card className="card-gradient border-2">
+        <Card>
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
@@ -189,7 +189,7 @@ const LeaveManagement = () => {
       </div>
 
       {/* Filter */}
-      <Card className="card-gradient border-2">
+      <Card>
         <CardContent className="pt-6">
           <Select value={statusFilter} onValueChange={setStatusFilter}>
             <SelectTrigger className="w-full md:w-64 h-11">
@@ -210,7 +210,7 @@ const LeaveManagement = () => {
         {filteredRequests.map((request, index) => (
           <Card
             key={request.id}
-            className="animate-slide-up hover:shadow-elegant transition-all duration-300 card-gradient border-2"
+            className="animate-slide-up hover:shadow-elegant transition-all duration-300"
             style={{ animationDelay: `${index * 50}ms` }}
           >
             <CardContent className="pt-6">
@@ -277,7 +277,7 @@ const LeaveManagement = () => {
       </div>
 
       {filteredRequests.length === 0 && (
-        <Card className="card-gradient border-2">
+        <Card>
           <CardContent className="py-12 text-center">
             <p className="text-muted-foreground">No leave requests found</p>
           </CardContent>

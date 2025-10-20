@@ -133,7 +133,7 @@ const Login = () => {
           <Moon className="w-5 h-5" />
         )}
       </Button>
-      <Card className="w-full max-w-md p-8 glass-effect animate-scale-in card-gradient border-2">
+      <Card className="w-full max-w-md p-8 glass-effect animate-scale-in">
         <div className="flex flex-col items-center mb-8">
           <div className="w-16 h-16 rounded-2xl gradient-primary flex items-center justify-center mb-4 shadow-elegant">
             <Building2 className="w-8 h-8 text-primary-foreground" />
