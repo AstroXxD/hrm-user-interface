@@ -110,7 +110,7 @@ const Reports = () => {
 
       {/* Report Cards */}
       <div className="grid gap-4 md:grid-cols-3">
-        <Card className="animate-slide-up">
+        <Card className="animate-slide-up card-gradient border-2">
           <CardContent className="pt-6">
             <div className="flex items-center justify-between mb-4">
               <div className="w-12 h-12 rounded-xl gradient-primary flex items-center justify-center">
@@ -131,7 +131,7 @@ const Reports = () => {
           </CardContent>
         </Card>
 
-        <Card className="animate-slide-up" style={{ animationDelay: "100ms" }}>
+        <Card className="animate-slide-up card-gradient border-2" style={{ animationDelay: "100ms" }}>
           <CardContent className="pt-6">
             <div className="flex items-center justify-between mb-4">
               <div className="w-12 h-12 rounded-xl gradient-accent flex items-center justify-center">
@@ -152,7 +152,7 @@ const Reports = () => {
           </CardContent>
         </Card>
 
-        <Card className="animate-slide-up" style={{ animationDelay: "200ms" }}>
+        <Card className="animate-slide-up card-gradient border-2" style={{ animationDelay: "200ms" }}>
           <CardContent className="pt-6">
             <div className="flex items-center justify-between mb-4">
               <div className="w-12 h-12 rounded-xl gradient-success flex items-center justify-center">
@@ -175,7 +175,7 @@ const Reports = () => {
       </div>
 
       {/* Employee Summary Report */}
-      <Card className="animate-slide-up" style={{ animationDelay: "300ms" }}>
+      <Card className="animate-slide-up card-gradient border-2" style={{ animationDelay: "300ms" }}>
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle>Employee Summary Report</CardTitle>
           <Button
@@ -219,7 +219,7 @@ const Reports = () => {
       </Card>
 
       {/* Leave Balance Report */}
-      <Card className="animate-slide-up" style={{ animationDelay: "400ms" }}>
+      <Card className="animate-slide-up card-gradient border-2" style={{ animationDelay: "400ms" }}>
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle>Leave Balance Report</CardTitle>
           <Button
