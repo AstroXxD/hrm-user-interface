@@ -143,7 +143,7 @@ const Settings = () => {
 
       <div className="grid gap-6 lg:grid-cols-3">
         {/* Profile Settings */}
-        <Card className="lg:col-span-2 card-gradient border-2">
+        <Card className="lg:col-span-2">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <User className="w-5 h-5" />
@@ -248,7 +248,7 @@ const Settings = () => {
         {/* Quick Actions */}
         <div className="space-y-6">
           {/* Theme Settings */}
-          <Card className="card-gradient border-2">
+          <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Palette className="w-5 h-5" />
@@ -280,7 +280,7 @@ const Settings = () => {
           </Card>
 
           {/* Account Status */}
-          <Card className="card-gradient border-2">
+          <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Shield className="w-5 h-5" />
@@ -310,7 +310,7 @@ const Settings = () => {
       </div>
 
       {/* Notification Settings */}
-      <Card className="card-gradient border-2">
+      <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Bell className="w-5 h-5" />
@@ -404,7 +404,7 @@ const Settings = () => {
       </Card>
 
       {/* System Preferences */}
-      <Card className="card-gradient border-2">
+      <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Globe className="w-5 h-5" />

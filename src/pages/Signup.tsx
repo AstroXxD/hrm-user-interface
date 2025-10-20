@@ -59,7 +59,7 @@ const Signup = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-secondary to-muted p-4">
-      <Card className="w-full max-w-md p-8 glass-effect animate-scale-in card-gradient border-2">
+      <Card className="w-full max-w-md p-8 glass-effect animate-scale-in">
         <div className="flex flex-col items-center mb-8">
           <div className="w-16 h-16 rounded-2xl gradient-accent flex items-center justify-center mb-4 shadow-elegant">
             <Building2 className="w-8 h-8 text-accent-foreground" />

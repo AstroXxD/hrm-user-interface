@@ -130,7 +130,7 @@ const Dashboard = () => {
         {stats.map((stat, index) => (
           <Card
             key={stat.title}
-            className="animate-slide-up hover:shadow-elegant transition-all duration-300 card-gradient border-2"
+            className="animate-slide-up hover:shadow-elegant transition-shadow duration-300"
             style={{ animationDelay: `${index * 100}ms` }}
           >
             <CardContent className="pt-6">
@@ -158,7 +158,7 @@ const Dashboard = () => {
       {/* Charts Grid */}
       <div className="grid gap-6 md:grid-cols-2">
         {/* Employee Distribution by Role */}
-        <Card className="animate-slide-up card-gradient border-2" style={{ animationDelay: "400ms" }}>
+        <Card className="animate-slide-up" style={{ animationDelay: "400ms" }}>
           <CardHeader>
             <CardTitle>Employee Distribution by Role</CardTitle>
           </CardHeader>
@@ -212,7 +212,7 @@ const Dashboard = () => {
         </Card>
 
         {/* Department-wise Employees */}
-        <Card className="animate-slide-up card-gradient border-2" style={{ animationDelay: "500ms" }}>
+        <Card className="animate-slide-up" style={{ animationDelay: "500ms" }}>
           <CardHeader>
             <CardTitle>Department-wise Employees</CardTitle>
           </CardHeader>
@@ -261,7 +261,7 @@ const Dashboard = () => {
       </div>
 
       {/* Attendance Trend */}
-      <Card className="animate-slide-up card-gradient border-2" style={{ animationDelay: "600ms" }}>
+      <Card className="animate-slide-up" style={{ animationDelay: "600ms" }}>
         <CardHeader>
           <CardTitle>Employee Attendance Trend</CardTitle>
         </CardHeader>
