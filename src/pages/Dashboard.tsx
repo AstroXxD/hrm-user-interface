@@ -55,11 +55,11 @@ const Dashboard = () => {
   ];
 
   const COLORS = [
-    "hsl(var(--primary))",
-    "hsl(var(--accent))",
-    "hsl(var(--success))",
-    "hsl(var(--warning))",
-    "hsl(var(--info))",
+    "#8B5CF6", // Purple
+    "#EC4899", // Pink
+    "#10B981", // Green
+    "#F59E0B", // Amber
+    "#3B82F6", // Blue
   ];
 
   const stats = [
@@ -165,7 +165,29 @@ const Dashboard = () => {
           <CardContent>
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={roleDistribution}>
-                <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+                <defs>
+                  <linearGradient id="colorBar1" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="#8B5CF6" stopOpacity={0.8}/>
+                    <stop offset="100%" stopColor="#8B5CF6" stopOpacity={0.3}/>
+                  </linearGradient>
+                  <linearGradient id="colorBar2" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="#EC4899" stopOpacity={0.8}/>
+                    <stop offset="100%" stopColor="#EC4899" stopOpacity={0.3}/>
+                  </linearGradient>
+                  <linearGradient id="colorBar3" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="#10B981" stopOpacity={0.8}/>
+                    <stop offset="100%" stopColor="#10B981" stopOpacity={0.3}/>
+                  </linearGradient>
+                  <linearGradient id="colorBar4" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="#F59E0B" stopOpacity={0.8}/>
+                    <stop offset="100%" stopColor="#F59E0B" stopOpacity={0.3}/>
+                  </linearGradient>
+                  <linearGradient id="colorBar5" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="#3B82F6" stopOpacity={0.8}/>
+                    <stop offset="100%" stopColor="#3B82F6" stopOpacity={0.3}/>
+                  </linearGradient>
+                </defs>
+                <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" opacity={0.3} />
                 <XAxis
                   dataKey="role"
                   stroke="hsl(var(--muted-foreground))"
@@ -179,7 +201,11 @@ const Dashboard = () => {
                     borderRadius: "8px",
                   }}
                 />
-                <Bar dataKey="count" fill="hsl(var(--primary))" radius={[8, 8, 0, 0]} />
+                <Bar dataKey="count" radius={[8, 8, 0, 0]}>
+                  {roleDistribution.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={`url(#colorBar${index + 1})`} />
+                  ))}
+                </Bar>
               </BarChart>
             </ResponsiveContainer>
           </CardContent>
@@ -197,13 +223,12 @@ const Dashboard = () => {
                   data={departmentData}
                   cx="50%"
                   cy="50%"
-                  labelLine={false}
-                  label={({ name, percent }) =>
-                    `${name} ${(percent * 100).toFixed(0)}%`
-                  }
-                  outerRadius={90}
-                  fill="#8884d8"
+                  innerRadius={70}
+                  outerRadius={100}
+                  paddingAngle={3}
                   dataKey="value"
+                  stroke="hsl(var(--background))"
+                  strokeWidth={3}
                 >
                   {departmentData.map((entry, index) => (
                     <Cell
@@ -217,6 +242,16 @@ const Dashboard = () => {
                     backgroundColor: "hsl(var(--card))",
                     border: "1px solid hsl(var(--border))",
                     borderRadius: "8px",
+                  }}
+                />
+                <Legend 
+                  verticalAlign="middle" 
+                  align="right"
+                  layout="vertical"
+                  iconType="circle"
+                  formatter={(value, entry: any) => {
+                    const item = departmentData.find(d => d.name === value);
+                    return `${value}: ${item?.value || 0}`;
                   }}
                 />
               </PieChart>
