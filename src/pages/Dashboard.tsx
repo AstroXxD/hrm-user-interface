@@ -199,6 +199,13 @@ const Dashboard = () => {
                     backgroundColor: "hsl(var(--card))",
                     border: "1px solid hsl(var(--border))",
                     borderRadius: "8px",
+                    color: "hsl(var(--foreground))",
+                  }}
+                  itemStyle={{
+                    color: "hsl(var(--foreground))",
+                  }}
+                  labelStyle={{
+                    color: "hsl(var(--foreground))",
                   }}
                 />
                 <Bar dataKey="count" radius={[8, 8, 0, 0]}>
@@ -242,6 +249,13 @@ const Dashboard = () => {
                     backgroundColor: "hsl(var(--card))",
                     border: "1px solid hsl(var(--border))",
                     borderRadius: "8px",
+                    color: "hsl(var(--foreground))",
+                  }}
+                  itemStyle={{
+                    color: "hsl(var(--foreground))",
+                  }}
+                  labelStyle={{
+                    color: "hsl(var(--foreground))",
                   }}
                 />
                 <Legend 
@@ -284,6 +298,13 @@ const Dashboard = () => {
                   backgroundColor: "hsl(var(--card))",
                   border: "1px solid hsl(var(--border))",
                   borderRadius: "8px",
+                  color: "hsl(var(--foreground))",
+                }}
+                itemStyle={{
+                  color: "hsl(var(--foreground))",
+                }}
+                labelStyle={{
+                  color: "hsl(var(--foreground))",
                 }}
               />
               <Legend />
